@@ -47,9 +47,9 @@ const typeDefs = gql`
     setCapacity(id: ID!, max_capacity: Int!): Courier
     addCapacity(id: ID!, max_capacity: Int!): Courier
     removeCapacity(id: ID!, max_capacity: Int!): Courier
-    createCourier(courier: CourierInput!) Courier
-    updateCourier(courier: CourierInput!) Courier
-    deleteCourrier(id: ID!) TransactionResponse
+    createCourier(courier: CourierInput!): Courier
+    updateCourier(courier: CourierInput!): Courier
+    deleteCourrier(id: ID!): TransactionResponse
   }
  
 `;
