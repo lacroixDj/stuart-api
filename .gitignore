@@ -4,26 +4,7 @@
 
 # Dependency directories
 node_modules/
-
-# Logs
-logs
-*.log
-npm-debug.log*
-
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# TypeScript v1 declaration files
-typings/
-
-# TypeScript cache
-*.tsbuildinfo
+api-graphql/node_modules/
 
 # Optional npm cache directory
 .npm
@@ -33,6 +14,3 @@ typings/
 
 # Optional REPL history
 .node_repl_history
-
-# Serverless directories
-.serverless/
