@@ -1,6 +1,6 @@
 # Stuart - API 
 
-![Infrastructure diagram](assets/stuart-api.jpg)
+![Infrastructure diagram](assets/1-stuart-api-infrastructure.jpg)
 
 This README.md file shows step by step how to install and run The Stuart API.
 
@@ -15,7 +15,8 @@ This README.md file shows step by step how to install and run The Stuart API.
 
 ## Requirements:
 
-There are two different methods to install and run this app:
+There are two (2) different methods to install and run this app:
+
   1. **Docker way:** Using Docker pre-built images with docker-compose (**recommended, more quick, straightforward and less painful)
   2. **Localhost way:** Bare metal install, first you should to install and set-up all the stack on your  host (Node.js, npm, MongoDB, dependencies) before to being able to run the API.
 
@@ -38,7 +39,7 @@ You should first install
 
 We need proceed to configure our ENV variables in order to connect the app with our  MongoDB **STUART-API-DB**:
 
-- Use .env.example  template file as starting point, teh app works well with the defaults values provided, with some exceptions
+- Use .env.example  template file as starting point, the app works well with the defaults values provided, with some exceptions
 
 ```
 # cp .env.example .env 
