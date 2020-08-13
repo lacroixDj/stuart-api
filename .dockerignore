@@ -1,0 +1,10 @@
+.git/
+.gitignore
+.env
+.env.example
+Dockerfile
+.dockerignore
+node_modules/
+npm-debug.log
+docker-compose.yml
+docker-compose.yml.save

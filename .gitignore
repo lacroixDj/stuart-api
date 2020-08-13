@@ -14,3 +14,5 @@ api-graphql/node_modules/
 
 # Optional REPL history
 .node_repl_history
+
+docker-compose.yml.save

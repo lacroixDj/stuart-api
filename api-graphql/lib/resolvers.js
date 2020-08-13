@@ -17,7 +17,7 @@ const resolvers = {
     },
 
     getCouriersByCapacity: (root, { capacity_required }) => {
-      return couriersService.getAllCouriersByCapacity(capacity_required);
+      return couriersService.getCouriersByCapacity(capacity_required);
     },
 
     getCouriersByCapacityAndProximity: (root, { capacity_required, position, radius }) => {

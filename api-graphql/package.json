@@ -11,7 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.16.0",
-    "graphql": "^15.3.0"
+    "graphql": "^15.3.0",
+    "mongoose": "^5.9.28",
+    "mongoose-float": "^1.0.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
