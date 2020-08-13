@@ -1,8 +1,6 @@
-// Requiring cutom utils methods
 const isEmpty = require("../common/utils"); 
-
-// Requiring the static couriers data from a Json file
-let courriers_data = require('../data/couriers-sample-data.json'); 
+const courriers_data = require('../data/couriers-sample-data.json'); 
+const CourierModel = require("../models/courier-model"); 
 
 /** 
  * CouriersService class
@@ -31,11 +29,14 @@ class CouriersService {
     getAllCouriers() {
         return new Promise((resolve, reject) => {
             try {
-                resolve(this.couriers);    
+                CourierModel.find(null, (error, couriers) => {
+                    if (error) throw (error);
+                    else resolve(couriers);                    
+                });
             } catch (error) {
                 console.log(error);
-                reject(error); 
-            }            
+                reject(error);  
+            }       
         });
     }
 
@@ -50,9 +51,10 @@ class CouriersService {
     getCourierById(id) {
         return new Promise((resolve, reject) => {
             try {
-                let courier_idx = this.couriers.findIndex((courier) => courier.id == id);
-                if(courier_idx < 0) throw `ERROR! - Courier id ${id} not found`;
-                resolve(this.couriers[courier_idx]);
+                CourierModel.findById(id, (error, courier) => {
+                    if (error) throw (error);
+                    else resolve(courier);                    
+                });
             } catch (error) {
                 console.log(error);
                 reject(error);  
@@ -68,15 +70,18 @@ class CouriersService {
      * @returns {Promise <Array <Courrier>>} A Promise chain with the Array of courriers 
      * @throws  {error}  it will a reject the promise if something goes wrong
     */
-    getAllCouriersByCapacity(capacity_required) {
+    getCouriersByCapacity(capacity_required) {
         return new Promise((resolve, reject) => {
             try {
-                resolve(this.couriers.filter(courrier => courrier.max_capacity >= capacity_required));
+                CourierModel.find({ max_capacity: { $gte: capacity_required }}, (error, couriers) => {
+                    if (error) throw (error);
+                    else resolve(couriers);                    
+                });
             } catch (error) {
                 console.log(error);
                 reject(error);  
-            }          
-        });
+            }       
+        }); 
     }
 
     
@@ -93,12 +98,27 @@ class CouriersService {
     getCouriersByCapacityAndProximity(capacity_required, position, radius){
         return new Promise((resolve, reject) => {
             try {
-                resolve(this.couriers.filter(courrier => courrier.max_capacity >= capacity_required));
+                CourierModel.find({ 
+                    max_capacity: { $gte: capacity_required },                    
+                    location: {
+                        $near: {
+                          $maxDistance: radius,
+                          $geometry: {
+                            type: "Point",
+                            coordinates: [position.lat, position.lng]
+                          }
+                        }
+                    }
+                }, 
+                (error, couriers) => {
+                    if (error) throw (error);
+                    else resolve(couriers);                    
+                });
             } catch (error) {
                 console.log(error);
                 reject(error);  
-            }          
-        });  
+            }       
+        }); 
     }
 
     
@@ -110,21 +130,23 @@ class CouriersService {
      * @returns {Promise <Object <Courrier>>} A Promise chain with the updated courier 
      * @throws  {error}  it will a reject the promise if something goes wrong 
     */
+
     setCapacity(id,  max_capacity){
         return new Promise((resolve, reject) => {
             try {
-                let courier_idx = this.couriers.findIndex((courier) => courier.id == id);
-                if(courier_idx < 0) throw `ERROR! - Courier id ${id} not found`;
-                if(!this.validateCapacityParam(max_capacity)) throw `ERROR! - max_capacity must be a valid integer`;
-                let capacity = parseInt(max_capacity);
-                
-                this.couriers[courier_idx].max_capacity = capacity;
-                resolve(this.couriers[courier_idx]);
+                CourierModel.findByIdAndUpdate(id,
+                    { max_capacity: max_capacity }, 
+                    {new: true}, 
+                    (error, courier) => {
+                        if (error) throw (error);
+                        else resolve(courier);                    
+                    }
+                );
             } catch (error) {
                 console.log(error);
                 reject(error);  
             }       
-        });
+        }); 
     }
 
     
@@ -139,17 +161,21 @@ class CouriersService {
     addCapacity(id,  max_capacity){
         return new Promise((resolve, reject) => {
             try {
-                let courier_idx = this.couriers.findIndex((courier) => courier.id == id);
-                if(courier_idx < 0) throw `ERROR! - Courier id ${id} not found`;
                 if(!this.validateCapacityParam(max_capacity)) throw `ERROR! - max_capacity must be a valid integer`;
-                let capacity = parseInt(max_capacity);
-                
-                this.couriers[courier_idx].max_capacity += Math.abs(capacity);
-                resolve(this.couriers[courier_idx]);
+                let capacity = Math.abs(parseInt(max_capacity));
+
+                CourierModel.findByIdAndUpdate(id,
+                    {$inc : {max_capacity : capacity}},
+                    {new: true}, 
+                    (error, courier) => {
+                        if (error) throw (error);
+                        else resolve(courier);                    
+                    }
+                );
             } catch (error) {
                 console.log(error);
                 reject(error);  
-            }
+            }       
         }); 
     }
 
@@ -165,18 +191,22 @@ class CouriersService {
     removeCapacity(id,  max_capacity){
         return new Promise((resolve, reject) => {
             try {
-                let courier_idx = this.couriers.findIndex((courier) => courier.id == id);
-                if(courier_idx < 0) throw `ERROR! - Courier id ${id} not found`;
                 if(!this.validateCapacityParam(max_capacity)) throw `ERROR! - max_capacity must be a valid integer`;
-                let capacity = parseInt(max_capacity);
-                
-                this.couriers[courier_idx].max_capacity -= Math.abs(capacity);
-                resolve(this.couriers[courier_idx]);
+                let capacity = (Math.abs(parseInt(max_capacity))*-1);
+
+                CourierModel.findByIdAndUpdate(id,
+                    {$inc : {max_capacity : capacity}}, 
+                    {new: true}, 
+                    (error, courier) => {
+                        if (error) throw (error);
+                        else resolve(courier);                    
+                    }
+                );
             } catch (error) {
                 console.log(error);
                 reject(error);  
-            } 
-        });
+            }       
+        }); 
     }
 
 
@@ -191,17 +221,24 @@ class CouriersService {
         return new Promise((resolve, reject) => {
             try {
                 if(!this.validateCourierParam(courier)) throw `ERROR! - Invalid courier input`;
+
+                let newCourier = new CourierModel({...courier});
+                newCourier.id = newCourier._id;
+                newCourier.location = {
+                    type: "Point",
+                    coordinates: [courier.position.lat, courier.position.lng]
+                }
                 
-                let id = this.couriers.length;
-                let newCourier = courier;
-                newCourier['id'] = id + 1;
-                this.couriers.push(newCourier);            
-                resolve(this.couriers[id]);
+                newCourier.save((error) => {
+                    if (error) throw error;
+                    else resolve(newCourier);
+                });
+
             } catch (error) {
                 console.log(error);
-                reject(error);  
-            } 
-        });
+                reject(error); 
+            }
+        }); 
     }
 
 
@@ -216,16 +253,26 @@ class CouriersService {
         return new Promise((resolve, reject) => {
             try {
                 if(isEmpty(id) || !this.validateCourierParam(new_courier)) throw `ERROR! - Invalid courier input`;
-                let courier_idx = this.couriers.findIndex((old_courier) => old_courier.id == id);
-                if(courier_idx < 0) throw `ERROR! - Courier id ${id} not found`;
                 
-                new_courier["id"] = id;
-                this.couriers[courier_idx] = new_courier;
-                resolve(this.couriers[courier_idx]);
+                if(!isEmpty(new_courier.position) && !isEmpty(new_courier.position.lat) && !isEmpty(new_courier.position.lng)) {
+                    new_courier["location"] = {
+                        type: "Point",
+                        coordinates: [new_courier.position.lat, new_courier.position.lng]
+                    }
+                }
+                
+                CourierModel.findByIdAndUpdate(id, 
+                    { ...new_courier }, 
+                    {new: true}, 
+                    (error, courier) => {
+                        if (error) throw (error);
+                        else resolve(courier);                    
+                    }
+                );
             } catch (error) {
                 console.log(error);
                 reject(error);  
-            }
+            }       
         }); 
     }
 
@@ -241,16 +288,16 @@ class CouriersService {
         return new Promise((resolve, reject) => {
             try {
                 if(isEmpty(id)) throw `ERROR! - Invalid id input`;
-                let courier_idx = this.couriers.findIndex((courier) => courier.id == id);
-                if(courier_idx < 0) throw `ERROR! - Courier id ${id} not found`;
-                
-                let courier = this.couriers[courier_idx]; 
-                this.couriers.splice(courier_idx, 1);
-                const transactionResponse = {
-                    status: 200,
-                    message: `SUCCESS! - The courier with the id: ${id} - ${courier.firstName} ${courier.lastName}  was deleted!`
-                }
-                resolve(transactionResponse);
+                CourierModel.findByIdAndDelete(id, (error) => {
+                    if (error) throw (error);
+                    else {
+                        const transactionResponse = {
+                            status: 200,
+                            message: `SUCCESS! - The courier with the id: ${id} was deleted!`
+                        }
+                        resolve(transactionResponse);                    
+                    }
+                });
             } catch (error) {
                 console.log(error);
                 reject(error);  
