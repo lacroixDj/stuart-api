@@ -1,0 +1,54 @@
+version: '3'
+services:
+  db_mongo:
+    image: mongo:4.0
+    restart: always
+    env_file: .env
+    environment:
+      MONGO_HOST: ${MONGO_HOST}
+      MONGO_PORT: ${MONGO_PORT}
+      MONGO_DB:   ${MONGO_DB}
+      MONGO_DB_USER: ${MONGO_DB_USER}
+      MONGO_DB_PASS: ${MONGO_DB_PASS}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - mongodb-data-volume:/db/data
+      - ${MONGO_SCRIPTS_DIR}:/docker-entrypoint-initdb.d
+    expose:
+      - ${MONGO_PORT}
+    ports: 
+      - ${MONGO_PORT}:${MONGO_PORT}
+    networks:
+      - apinetwork
+  api_graphql:
+    image: "node:lts"
+    user: "node"
+    working_dir: /home/node/app
+    env_file: .env
+    environment:
+      API_PORT:   ${API_PORT}
+      MONGO_HOST: ${MONGO_HOST}
+      MONGO_PORT: ${MONGO_PORT}
+      MONGO_DB:   ${MONGO_DB}
+      MONGO_DB_USER: ${MONGO_DB_USER}
+      MONGO_DB_PASS: ${MONGO_DB_PASS}
+    volumes:
+      - ./api-graphql:/home/node/app
+    expose:
+      - ${API_PORT}
+    command: bash -c "npm install && npm start"
+    restart: always
+    ports: 
+      - ${API_PORT}:${API_PORT}
+    depends_on:
+      - db_mongo
+    links:
+      - db_mongo    
+    networks:
+      - apinetwork
+volumes:
+  mongodb-data-volume:
+networks:
+  apinetwork:
+    driver: bridge
