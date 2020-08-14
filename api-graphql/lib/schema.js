@@ -24,8 +24,8 @@ const typeDefs = gql`
   }
   
   type Coordinates {
-    lat: Float!
-    lng: Float!
+    lat: Float
+    lng: Float
   }
 
   type Courier {
@@ -45,9 +45,9 @@ const typeDefs = gql`
 
   input  CourierInput {
     max_capacity: Int!
-    firstName: String!
-    lastName: String!
-    email: String!
+    firstName: String
+    lastName: String
+    email: String
     active: Boolean
     position: CoordinatesInput
   }
