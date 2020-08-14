@@ -426,7 +426,7 @@ Let's see how it Looks in **GraphQL Playground:**
 ![Get Couriers By Capacity](assets/6-get-couriers-by-capacity.jpg)
 
 
-### 4) - Get Couriers By Capacity and Proximity: consulting the list of Couriers which are closer to certain location with the necessary capacity, using radial search by geolocation.
+### 4) - Get Couriers By Capacity and Proximity Radius: consulting the list of Couriers which are closer to certain location using radial search by geolocation.
 
 Consult the list of available couriers whose capacity is greater than or equal to that required capacity, but also **whose geographical location is within a radius expressed in meters in relation to the coordinates of a specific reference point**.
 
@@ -441,7 +441,7 @@ It takes as a parameter the **required capacity**, the **reference coordinates**
 - first let's search within a **200 meter radius**
 - then let's search within a radius of **300 meters**
 - finally let's search in a **radius of 1Km**
-- We will use the **geographic coordinates of Stuart's offices in Barcelona (Carrer de Pau Claris, 186) as a reference**  ;):
+- We will use the **geographic coordinates of Stuart's offices in Barcelona (Carrer de Pau Claris, 186) as a reference**  ;)
 - Reference point: **{lat: 41.3964769, lng: 2.1604493}**  
 
 **1 - First search 200 mts - Query request:**
