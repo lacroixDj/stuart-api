@@ -849,13 +849,13 @@ stuart-api/
 
 ## Things to improve (Future Versions):
 
-- **Implement an authentication mechanism, quizás con JWT**
+- **Implement an authentication mechanism, maybe con JWT**
 - **Implement an authorization scheme, or ACL so that only certain users can execute certain methods**
 - **Implement security measures (helmet, security headers, etc), make a deep search  for  possible vulnerabilities**
 - **Implement Cross-origin resource sharing (CORS) policies to allow trusted apps to consume from the API**
 - **Develop and implement automated tests, unit tests, and functional tests**
 - **Deploy and configure the environment to facilitate deployment on AWS (Lambda, Serverless)**
-- **Despite the fact that everything has been programmed asynchronously using promises, which would avoid blocking I/O operations on the same resource, maybe it would be necessary to test edge cases thoroughly, to identify if there is a possibility to occur any race conditions**
+- **Despite the fact that everything has been programmed asynchronously using promises (resolve, reject), avoiding blocking I/O operations on the same resource. Maybe it would be necessary to test edge cases thoroughly, to identify if there is any possibility for race conditions can occur**
 - **evaluate a possible migration to TypeScript for the benefits it would bring**
 - **It would be nice to make the front end with a map library ;)**
 
