@@ -782,7 +782,7 @@ Let's see how it Looks in **GraphQL Playground:**
 
 ### 10) - Delete Courier: Remove a Courier from the DB 
 
-Kylo ren killed his father, (unforgivable, don't you think? ... wait a moment Luke did the same!). Well, it's time to say goodbye to the legendary Han Solo (we'll miss you Han). 
+Kylo Ren killed his father, (unforgivable, don't you think? ... wait a moment Luke did the same!). Well, it's time to say goodbye to the legendary Han Solo (we'll miss you Han). 
 
 Speaking seriously, let's see how we remove a courier
 
