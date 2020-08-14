@@ -216,7 +216,7 @@ Open your browser and go to: http://localhost:4000/
 - Supports full GraphQL Language Specification.
 - Queries, Mutations, Subscriptions, etc
 
-## API "Main" Methods:
+## API METHODS:
 
 ### Create Courier: inserting a new Courier into the DB
 
