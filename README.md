@@ -67,7 +67,7 @@ If everything is OK, at the end you should see an output similar tho this:
 
 That's it! ;) pretty easy... Isn't it? (that's the reason people love docker) 
 
-If you succeed in the docker way, then skip the following steps and jump over the usage instructions - Yes! Skip and Take me to [Using the API](#Using the API):
+If you succeed in the docker way, then skip the following steps and jump over the usage instructions - Yes! Skip and Take me to [Using the API](#using-the-api):
 
 ## Instalation method #2  - Localhost way: 
 
