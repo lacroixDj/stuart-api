@@ -218,7 +218,7 @@ Open your browser and go to: http://localhost:4000/
 
 ## API METHODS:
 
-### Create Courier: inserting a new Courier into the DB
+### 1) - Create Courier: inserting a new Courier into the DB
 
 First of all, we must create at least one **Courier** to be able to use the rest of the available methods.
 
@@ -318,7 +318,7 @@ We have taken the initiative to include additional fields that we think may be u
 - **position { lat, lng } :** this field  represents the **current Courier's position expressed in geographical coordinates**, this field will help us later to query for the couries closest to a specific location/point (see advanced methods)
 
 
-### Set Capacity: update a Courier Capacity
+### 2) - Set Capacity: update a Courier Capacity
 
 This method simply updates / overwrites the **max_capacity** field according to the indicated value, for a given Courier. It receives as parameters the  Courier's **id**  and the **max_capacity** value.
 
@@ -360,95 +360,7 @@ Let's see how it Looks in **GraphQL Playground:**
 In most queries, the response is a **Courier object** whose only required fields are **ID** and **max_capacity**, fields that will always be returned in queries responses.
 However, as we could see in the previous examples, we can request the additional fields if we wish, this applies to almost all the methods of the API.
 
-### Add Capacity: increasing a Courier Capacity
-
-This method is used only **to increase in N lts. the max_capacity field value**, for a specific courier according to ID provided. It is works under the following logic **max_capacity + = new_value**.  It receives as parameters the  Courier's **id**  and the **max_capacity (increment)** value.
-
-Taking as an example our courier **"Obi-wan Kenobi"** whose previous maximum capacity was **74 liters**, let's increase its capacity to **120 liters** for example:
-
-**Mutation request:**
-```
-mutation {
-  addCapacity(id: "5f35d4619383ea0054884a16", max_capacity: 46) {
-    id
-    max_capacity
-    firstName
-    lastName
-    email
-  }
-}
-```
-
-**API response:**
-```
-{
-  "data": {
-    "addCapacity": {
-      "id": "5f35d4619383ea0054884a16",
-      "max_capacity": 120,
-      "firstName": "Obi-Wan",
-      "lastName": "Kenobi",
-      "email": "obiwan@stuart.com"
-    }
-  }
-}
-```
-
-**CURL Snippet:**
-```
-curl 'http://localhost:4000/' -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: http://localhost:4000' --data-binary '{"query":"mutation {\n  addCapacity(id: \"5f35d4619383ea0054884a16\", max_capacity: 46) {\n    id\n    max_capacity\n    firstName\n    lastName\n    email\n  }\n}\n"}' --compressed
-```
-
-Let's see how it Looks in **GraphQL Playground:**
-
-![Add capacity](assets/4-add-capacity.jpg)
-
-### Remove Capacity: decreasing a Courier Capacity
-
-Basically it **is the opposite of the addCapacity method** explained above, it receives the same parameters but instead of increasing the capacity of the courier it decreases it. It is works under the following logic **max_capacity -= new_value**.
-
-Following the same example of our messenger **"Obi-wan Kenobi"** to which we had previously increased the maximum capacity to **120 liters**, let's reduce this capacity to about **30 liters** for example:
-
-
-**Mutation request:**
-```
-mutation {
-  removeCapacity(id: "5f35d4619383ea0054884a16", max_capacity: 90) {
-    id
-    max_capacity
-    firstName
-    lastName
-    email
-  }
-}
-```
-
-**API response:**
-```
-{
-  "data": {
-    "removeCapacity": {
-      "id": "5f35d4619383ea0054884a16",
-      "max_capacity": 30,
-      "firstName": "Obi-Wan",
-      "lastName": "Kenobi",
-      "email": "obiwan@stuart.com"
-    }
-  }
-}
-```
-
-**CURL Snippet:**
-```
-curl 'http://localhost:4000/' -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: http://localhost:4000' --data-binary '{"query":"mutation {\n  removeCapacity(id: \"5f35d4619383ea0054884a16\", max_capacity: 90) {\n    id\n    max_capacity\n    firstName\n    lastName\n    email\n  }\n}\n"}' --compressed
-```
-
-Let's see how it Looks in **GraphQL Playground:**
-
-![Remove capacity](assets/5-remove-capacity.jpg)
-
-
-### Get Couriers By Capacity: consulting the list of Couriers by Max Capacity
+### 3) - Get Couriers By Capacity: consulting the list of Couriers by Max Capacity
 
 This method allows you to **consult the list of Couriers whose capacity is greater or equal to the one required**. The Dispatcher should use this Method to find out which couriers do have available space.
 
@@ -514,7 +426,7 @@ Let's see how it Looks in **GraphQL Playground:**
 ![Get Couriers By Capacity](assets/6-get-couriers-by-capacity.jpg)
 
 
-### Get Couriers By Capacity and Proximity: consulting the list of Couriers which are closer to certain location with the necessary capacity, using radial search by geolocation.
+### 4) - Get Couriers By Capacity and Proximity: consulting the list of Couriers which are closer to certain location with the necessary capacity, using radial search by geolocation.
 
 Consult the list of available couriers whose capacity is greater than or equal to that required capacity, but also **whose geographical location is within a radius expressed in meters in relation to the coordinates of a specific reference point**.
 
@@ -592,7 +504,95 @@ Let's see how it Looks in **GraphQL Playground:**
 
 ![Get Couriers by Capacity and Proximity 1km mts](assets/9-get-couriers-by-proximity-1km.jpg)
 
-### Get Courier By Id: look for a Courier by the unique ID: 
+### 5) - Add Capacity: increasing a Courier Capacity
+
+This method is used only **to increase in N lts. the max_capacity field value**, for a specific courier according to ID provided. It is works under the following logic **max_capacity + = new_value**.  It receives as parameters the  Courier's **id**  and the **max_capacity (increment)** value.
+
+Taking as an example our courier **"Obi-wan Kenobi"** whose previous maximum capacity was **74 liters**, let's increase its capacity to **120 liters** for example:
+
+**Mutation request:**
+```
+mutation {
+  addCapacity(id: "5f35d4619383ea0054884a16", max_capacity: 46) {
+    id
+    max_capacity
+    firstName
+    lastName
+    email
+  }
+}
+```
+
+**API response:**
+```
+{
+  "data": {
+    "addCapacity": {
+      "id": "5f35d4619383ea0054884a16",
+      "max_capacity": 120,
+      "firstName": "Obi-Wan",
+      "lastName": "Kenobi",
+      "email": "obiwan@stuart.com"
+    }
+  }
+}
+```
+
+**CURL Snippet:**
+```
+curl 'http://localhost:4000/' -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: http://localhost:4000' --data-binary '{"query":"mutation {\n  addCapacity(id: \"5f35d4619383ea0054884a16\", max_capacity: 46) {\n    id\n    max_capacity\n    firstName\n    lastName\n    email\n  }\n}\n"}' --compressed
+```
+
+Let's see how it Looks in **GraphQL Playground:**
+
+![Add capacity](assets/4-add-capacity.jpg)
+
+### 6) - Remove Capacity: decreasing a Courier Capacity
+
+Basically it **is the opposite of the addCapacity method** explained above, it receives the same parameters but instead of increasing the capacity of the courier it decreases it. It is works under the following logic **max_capacity -= new_value**.
+
+Following the same example of our messenger **"Obi-wan Kenobi"** to which we had previously increased the maximum capacity to **120 liters**, let's reduce this capacity to about **30 liters** for example:
+
+
+**Mutation request:**
+```
+mutation {
+  removeCapacity(id: "5f35d4619383ea0054884a16", max_capacity: 90) {
+    id
+    max_capacity
+    firstName
+    lastName
+    email
+  }
+}
+```
+
+**API response:**
+```
+{
+  "data": {
+    "removeCapacity": {
+      "id": "5f35d4619383ea0054884a16",
+      "max_capacity": 30,
+      "firstName": "Obi-Wan",
+      "lastName": "Kenobi",
+      "email": "obiwan@stuart.com"
+    }
+  }
+}
+```
+
+**CURL Snippet:**
+```
+curl 'http://localhost:4000/' -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: http://localhost:4000' --data-binary '{"query":"mutation {\n  removeCapacity(id: \"5f35d4619383ea0054884a16\", max_capacity: 90) {\n    id\n    max_capacity\n    firstName\n    lastName\n    email\n  }\n}\n"}' --compressed
+```
+
+Let's see how it Looks in **GraphQL Playground:**
+
+![Remove capacity](assets/5-remove-capacity.jpg)
+
+
+### 7) - Get Courier By Id: look for a Courier by the unique ID: 
 
 **Query request:**
 ```
@@ -641,7 +641,7 @@ Let's see how it Looks in **GraphQL Playground:**
 
 ![Get Couriers By Id](assets/10-get-courier-by-id.jpg)
 
-### Get All Couriers: Fetch all couriers in the DB 
+### 8) - Get All Couriers: Fetch all couriers in the DB 
 
 **Query request:**
 ```
@@ -705,7 +705,7 @@ Let's see how it Looks in **GraphQL Playground:**
 ![Get Couriers By Id](assets/11-get-all-couriers.jpg)
 
 
-### Update Courier: Updates the courier attributes in the DB 
+### 9) - Update Courier: Updates the courier attributes in the DB 
 
 Anakin seems to have been feeling very upset lately,  Let's give him a hand and turn him to the dark side to become Darth Vader ;)
 
@@ -767,7 +767,7 @@ Let's see how it Looks in **GraphQL Playground:**
 ![Get Couriers By Id](assets/12-update-courier.jpg)
 
 
-### Delete Courier: Remove a Courier from the DB 
+### 10) - Delete Courier: Remove a Courier from the DB 
 
 Kylo ren killed his father, (unforgivable, don't you think? ... wait a moment Luke did the same!). Well, it's time to say goodbye to the legendary Han Solo (we'll miss you Han). 
 
@@ -808,7 +808,6 @@ Let's see how it Looks in **GraphQL Playground:**
 ## Directory structure and source code organization:
 
 The source code is organized as follows:
-
 
 ```
 stuart-api/
