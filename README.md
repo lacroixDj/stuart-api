@@ -514,7 +514,7 @@ Let's see how it Looks in **GraphQL Playground:**
 
 ### Get Couriers By Capacity and Proximity: consulting the list of Couriers which are closer to certain location with the necessary capacity, using radial search by geolocation.
 
-Consult the list of available couriers whose capacity is greater than or equal to that required, but also **whose geographical location is within a radius expressed in meters in relation to the coordinates of a specific reference point**.
+Consult the list of available couriers whose capacity is greater than or equal to that required capacity, but also **whose geographical location is within a radius expressed in meters in relation to the coordinates of a specific reference point**.
 
 In summary, it is similar to the previous method but also **incorporates radial search by geolocation**, taking advantage of the **GIS functionalities** provided by MongoDB and Mongoose.
 
