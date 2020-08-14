@@ -224,11 +224,14 @@ class CouriersService {
 
                 let newCourier = new CourierModel({...courier});
                 newCourier.id = newCourier._id;
-                newCourier.location = {
-                    type: "Point",
-                    coordinates: [courier.position.lat, courier.position.lng]
-                }
                 
+                if(!isEmpty(courier.position) && !isEmpty(courier.position.lat) && !isEmpty(courier.position.lng)){
+                    newCourier.location = {
+                        type: "Point",
+                        coordinates: [courier.position.lat, courier.position.lng]
+                    }
+                }
+                                
                 newCourier.save((error) => {
                     if (error) throw error;
                     else resolve(newCourier);
@@ -313,7 +316,7 @@ class CouriersService {
      * @returns {boolean} true if the param is valid, otherwise returns false 
     */
     validateCourierParam(courier){
-        return (isEmpty(courier) || isEmpty(courier.firstName) || isEmpty(courier.lastName) || isEmpty(courier.email) || !this.validateCapacityParam(courier.max_capacity))? false : true; 
+        return (isEmpty(courier) || !this.validateCapacityParam(courier.max_capacity))? false : true; 
     }
 
     
