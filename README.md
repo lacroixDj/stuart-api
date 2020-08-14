@@ -425,6 +425,7 @@ Let's see how it Looks in **GraphQL Playground:**
 
 ![Get Couriers By Capacity](assets/6-get-couriers-by-capacity.jpg)
 
+#
 
 ### 4) - Get Couriers By Capacity and Proximity Radius: consulting the list of Couriers which are closer to certain location using radial search by geolocation.
 
