@@ -317,6 +317,7 @@ We have taken the initiative to include additional fields that we think may be u
 - **active:** this field that tells us wheter the courier is on duty or is not available a this time.
 - **position { lat, lng } :** this field  represents the **current Courier's position expressed in geographical coordinates**, this field will help us later to query for the couries closest to a specific location/point (see advanced methods)
 
+#
 
 ### 2) - Set Capacity: update a Courier Capacity
 
@@ -359,6 +360,8 @@ Let's see how it Looks in **GraphQL Playground:**
 
 In most queries, the response is a **Courier object** whose only required fields are **ID** and **max_capacity**, fields that will always be returned in queries responses.
 However, as we could see in the previous examples, we can request the additional fields if we wish, this applies to almost all the methods of the API.
+
+#
 
 ### 3) - Get Couriers By Capacity: consulting the list of Couriers by Max Capacity
 
@@ -505,6 +508,8 @@ Let's see how it Looks in **GraphQL Playground:**
 
 ![Get Couriers by Capacity and Proximity 1km mts](assets/9-get-couriers-by-proximity-1km.jpg)
 
+#
+
 ### 5) - Add Capacity: increasing a Courier Capacity
 
 This method is used only **to increase in N lts. the max_capacity field value**, for a specific courier according to ID provided. It is works under the following logic **max_capacity + = new_value**.  It receives as parameters the  Courier's **id**  and the **max_capacity (increment)** value.
@@ -547,6 +552,8 @@ curl 'http://localhost:4000/' -H 'Accept-Encoding: gzip, deflate, br' -H 'Conten
 Let's see how it Looks in **GraphQL Playground:**
 
 ![Add capacity](assets/4-add-capacity.jpg)
+
+#
 
 ### 6) - Remove Capacity: decreasing a Courier Capacity
 
@@ -592,6 +599,7 @@ Let's see how it Looks in **GraphQL Playground:**
 
 ![Remove capacity](assets/5-remove-capacity.jpg)
 
+#
 
 ### 7) - Get Courier By Id: look for a Courier by the unique ID: 
 
@@ -641,6 +649,8 @@ curl 'http://localhost:4000/' -H 'Accept-Encoding: gzip, deflate, br' -H 'Conten
 Let's see how it Looks in **GraphQL Playground:**
 
 ![Get Couriers By Id](assets/10-get-courier-by-id.jpg)
+
+#
 
 ### 8) - Get All Couriers: Fetch all couriers in the DB 
 
@@ -705,6 +715,7 @@ Let's see how it Looks in **GraphQL Playground:**
 
 ![Get Couriers By Id](assets/11-get-all-couriers.jpg)
 
+#
 
 ### 9) - Update Courier: Updates the courier attributes in the DB 
 
@@ -767,6 +778,7 @@ Let's see how it Looks in **GraphQL Playground:**
 
 ![Get Couriers By Id](assets/12-update-courier.jpg)
 
+#
 
 ### 10) - Delete Courier: Remove a Courier from the DB 
 
@@ -805,6 +817,7 @@ Let's see how it Looks in **GraphQL Playground:**
 
 ![Get Couriers By Id](assets/13-delete-courier.jpg)
 
+#
 
 ## Directory structure and source code organization:
 
@@ -847,6 +860,8 @@ stuart-api/
 ├── LICENSE
 └── README.md
 ```
+
+#
 
 ## Things to improve (Future Versions):
 
