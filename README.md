@@ -17,7 +17,7 @@ This README.md file shows step by step how to install and run The Stuart API.
 
 There are two (2) different methods to install and run this app:
 
-  1. **Docker way:** Using Docker pre-built images with docker-compose **(RECOMENDED!!! If you feel comfortable with Docker this way more quickly, straightforward and less painful)**
+  1. **Docker way:** Using Docker pre-built images with docker-compose **(RECOMENDED!!! If you feel comfortable with Docker this way is more quickly, straightforward and less painful)**
   2. **Localhost way:** Bare metal install, first you should to install and set-up all the stack on your  host (Node.js, npm, MongoDB, dependencies) before to being able to run the API.
 
 ## Instalation method #1  - Docker way: 
