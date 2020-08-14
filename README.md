@@ -865,7 +865,7 @@ stuart-api/
 
 ## Things to improve (Future Versions):
 
-- **Implement an authentication mechanism, maybe con JWT**
+- **Implement an authentication mechanism, maybe using JWT**
 - **Implement an authorization scheme, or ACL so that only certain users can execute certain methods**
 - **Implement security measures (helmet, security headers, etc), make a deep search  for  possible vulnerabilities**
 - **Implement Cross-origin resource sharing (CORS) policies to allow trusted apps to consume from the API**
