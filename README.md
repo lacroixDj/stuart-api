@@ -224,6 +224,8 @@ First of all, we must create at least one **Courier** to be able to use the rest
 
 Let's see below the simplest way to create a Courier, **according to the functional requirements** it was only necessary to specify the **max_capcaity** field, our API will return the ID of the created courier:
 
+**INFO! sample data included in:**  api-graphql/lib/data/couriers-sample-data.json
+
 **Mutation request:**
 ```
 mutation {
