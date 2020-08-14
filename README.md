@@ -171,7 +171,7 @@ $ mongo --port 27017 -u "stuart_db_user" --authenticationDatabase "STUART-API-DB
 
 We need proceed to configure our ENV variables in order to connect the app with our  MongoDB **STUART-API-DB**:
 
-- Use .env.example  template file as starting point, teh app works well with the defaults values provided, with some exceptions
+- Use .env.example  template file as starting point, the app works well with the defaults values provided
 
 ```
 # cp .env.example .env 
@@ -199,6 +199,9 @@ Once the app is installed lets run our API ;)!
 Whatever the installation method was chosen if everything went **OK**  then we could be able to explore our API
 
 ## GraphQL Playground (API Explorer):
+
+Open your browser and go to: http://localhost:4000/
+
 
 ### Features
 
